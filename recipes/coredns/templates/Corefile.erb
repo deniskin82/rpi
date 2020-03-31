@@ -1,0 +1,13 @@
+.:<%= node[:coredns][:ports][:dns] %> {
+  log . "{proto} Request: {name} {type} {>id}"
+  forward . <%= node[:coredns][:google_dns].join(' ') %> {
+    policy round_robin
+  }
+  cache 30
+  hosts /etc/hosts {
+    fallthrough
+  }
+  prometheus 0.0.0.0:<%= node[:coredns][:ports][:prometheus] %>
+  errors
+  health 0.0.0.0:<%= node[:coredns][:ports][:health] %>
+}
