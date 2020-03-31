@@ -33,7 +33,10 @@ runcmd:
   - cloud-init-per always sethost hostnamectl set-hostname ${host_prefix}${ip_dash}
   - cloud-init-per once donwload_mitamae curl -s -S https://github.com/itamae-kitchen/mitamae/releases/download/v1.11.6/mitamae-aarch64-linux -o /usr/local/bin/mitamae
   - cloud-init-per always chmod_mitamae chmod 0755 /usr/local/bin/mitamae
-#  - cloud-init-per once git
+  - cloud-init-per once clone_repo git clone https://github.com/deniskin82/rpi.git /opt/rpi
+  - cloud-init-per always pull_repo git pull /opt/rpi
+  - cloud-init-per always install_coredns mitamae local /opt/rpi/recipes/coredns/install.rb
+  - cloud-init-per always run_coredns mitamae local /opt/rpi/recipes/coredns/run.rb
 
 ## Add users and groups to the system, and import keys with the ssh-import-id
 ## utility
