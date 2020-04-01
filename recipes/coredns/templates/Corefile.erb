@@ -3,6 +3,7 @@
   forward . <%= node[:coredns][:google_dns].join(' ') %> {
     policy round_robin
   }
+  bind <%= node[:facter][:networking][:ip] %>
   cache 30
   hosts /etc/hosts {
     fallthrough

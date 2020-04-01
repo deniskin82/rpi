@@ -4,7 +4,7 @@ define :run_coredns do
   template "#{node[:coredns][:confdir]}/Corefile" do
     action :create
     mode '0444'
-    source "#{cwd}/Corefile.erb"
+    source "#{cwd}/templates/Corefile.erb"
     # variables(
     #   consul_domain: consul_domain,
     #   consul_recursors: consul_recursors.join(' ')
@@ -14,7 +14,7 @@ define :run_coredns do
   template '/lib/systemd/system/coredns.service' do
     action :create
     mode '0444'
-    source "#{cwd}/coredns.service.erb"
+    source "#{cwd}/templates/coredns.service.erb"
   end
 
   service 'coredns' do
