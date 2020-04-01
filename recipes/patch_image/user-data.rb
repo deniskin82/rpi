@@ -6,7 +6,7 @@ package 'xz-utils'
 package 'kpartx'
 
 execute 'decompress image' do
-  command "xz -d #{ENV['HOME']}/Downloads/#{ubuntu_img}.xz"
+  command "xz -k -d #{ENV['HOME']}/Downloads/#{ubuntu_img}.xz"
   not_if "test -f #{ENV['HOME']}/Downloads/#{ubuntu_img}"
 end
 
