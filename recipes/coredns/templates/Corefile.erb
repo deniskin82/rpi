@@ -2,6 +2,7 @@
   log . "{proto} Request: {name} {type} {>id}"
   forward . <%= node[:coredns][:google_dns].join(' ') %> {
     policy round_robin
+    tls_servername dns.google
   }
   bind <%= node[:facter][:networking][:ip] %>
   cache 30

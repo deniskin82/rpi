@@ -9,4 +9,4 @@ coredns:
     dns: 53
     health: 8091
     prometheus: 9153
-  google_dns: [ 'tls://8.8.8.8:53', 'tls://8.8.4.4:53' ]
+  google_dns: [ 'tls://8.8.8.8', 'tls://8.8.4.4' ]
