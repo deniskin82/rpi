@@ -10,3 +10,15 @@ coredns:
     health: 8091
     prometheus: 9153
   google_dns: [ 'tls://8.8.8.8', 'tls://8.8.4.4' ]
+ntp:
+  master:
+    servers:
+      - 'server 0.us.pool.ntp.org'
+      - 'server 1.us.pool.ntp.org'
+      - 'server 2.us.pool.ntp.org'
+      - 'server 3.us.pool.ntp.org'
+  minion:
+    servers:
+      - 'ntp.local'
+  restrict:
+    local: 'restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap'
