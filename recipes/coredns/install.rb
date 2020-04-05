@@ -1,9 +1,14 @@
 define :install_coredns do
   cwd = File.dirname(__FILE__)
+  package 'facter'
+  linux_arch      = case node[:facter][:os][:architecture]
+  when 'aarch64'
+    'arm64'
+  end
   coredns_version = ENV['COREDNS_VERSION'] || params[:version] || '1.6.9'
   coredns_path    = node[:coredns][:homedir] || '/opt/coredns'
   coredns_user    = node[:coredns][:user] || 'coredns'
-  coredns_url     = "https://github.com/coredns/coredns/releases/download/v#{coredns_version}/coredns_#{coredns_version}_linux_arm64.tgz"
+  coredns_url     = "https://github.com/coredns/coredns/releases/download/v#{coredns_version}/coredns_#{coredns_version}_linux_#{linux_arch}.tgz"
   coredns_tar     = '/tmp/coredns.tgz'
   coredns_confdir = node[:coredns][:confdir] || "#{coredns_path}/config"
 
