@@ -37,7 +37,7 @@ runcmd:
   - cloud-init-per always sleep sleep 5
   - cloud-init-per once clone_repo git clone https://github.com/deniskin82/rpi.git /opt/rpi
   - cloud-init-per always update bash /opt/rpi/update.sh
-  - cloud-init-per always master_role mitamae local -y /opt/rpi/node.yaml /opt/rpi/recipes/master.rb
+  - cloud-init-per always master_role mitamae local -y /opt/rpi/node.yaml /opt/rpi/master.rb
 
 ## Add users and groups to the system, and import keys with the ssh-import-id
 ## utility
