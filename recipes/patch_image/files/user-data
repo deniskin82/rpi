@@ -36,9 +36,8 @@ runcmd:
   - cloud-init-per always chmod_mitamae chmod 0755 /usr/local/bin/mitamae
   - cloud-init-per always sleep sleep 5
   - cloud-init-per once clone_repo git clone https://github.com/deniskin82/rpi.git /opt/rpi
-  - cloud-init-per always pull_repo git pull /opt/rpi
-  - cloud-init-per always install_coredns mitamae local -y /opt/rpi/node.yaml /opt/rpi/recipes/coredns/install.rb
-  - cloud-init-per always run_coredns mitamae local -y /opt/rpi/node.yaml /opt/rpi/recipes/coredns/run.rb
+  - cloud-init-per always update bash /opt/rpi/update.sh
+  - cloud-init-per always master_role mitamae local -y /opt/rpi/node.yaml /opt/rpi/recipes/master.rb
 
 ## Add users and groups to the system, and import keys with the ssh-import-id
 ## utility
