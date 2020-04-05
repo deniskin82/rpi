@@ -1,9 +1,11 @@
 define :install_coredns do
   cwd = File.dirname(__FILE__)
   package 'facter'
-  linux_arch      = case node[:facter][:os][:architecture]
+  linux_arch      = case node[:kernel][:machine]
   when 'aarch64'
     'arm64'
+  when 'x86_64'
+    'amd64'
   end
   coredns_version = ENV['COREDNS_VERSION'] || params[:version] || '1.6.9'
   coredns_path    = node[:coredns][:homedir] || '/opt/coredns'
