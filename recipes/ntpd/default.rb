@@ -1,4 +1,5 @@
 package 'ntp'
+cwd = File.dirname(__FILE__)
 
 template '/etc/ntp.conf' do
   action :create
