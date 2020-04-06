@@ -12,9 +12,14 @@ end
 
 mapped_dev = run_command("kpartx -a -v #{ENV['HOME']}/Downloads/#{ubuntu_img} | egrep 'p1 ' | cut -d ' ' -f3")
 dm = mapped_dev.stdout.chomp
+loop_dev = dm.sub(/p1$/,'')
 
-execute 'mount mapped_dev' do
-  command "udisksctl mount -b /dev/mapper/#{dm}"
+execute 'mount boot' do
+  command "udisksctl mount -b /dev/mapper/#{loop_dev}p1"
+end
+
+execute 'mount root' do
+  command "udisksctl mount -b /dev/mapper/#{loop_dev}p2"
 end
 
 remote_file "/media/#{ENV['USER']}/system-boot/user-data" do
@@ -22,9 +27,21 @@ remote_file "/media/#{ENV['USER']}/system-boot/user-data" do
   mode '0644'
 end
 
-execute 'unmount mapped_dev' do
-  command "udisksctl unmount -b /dev/mapper/#{dm}"
-  only_if "udisksctl info -b /dev/mapper/#{dm}"
+file "/media/#{ENV['USER']}/writable/etc/cloud/cloud.cfg" do
+  action :edit
+  block do |content|
+    content.gsub!(/^.*scripts-user.*$/, ' - [ scripts-user, always ]')
+  end
 end
 
-execute "kpartx -d -v /dev/#{dm.sub(/p1$/,'')}"
+execute 'unmount boot' do
+  command "udisksctl unmount -b /dev/mapper/#{loop_dev}p1"
+  only_if "udisksctl info -b /dev/mapper/#{loop_dev}p1"
+end
+
+execute 'unmount root' do
+  command "udisksctl unmount -b /dev/mapper/#{loop_dev}p2"
+  only_if "udisksctl info -b /dev/mapper/#{loop_dev}p2"
+end
+
+execute "kpartx -d -v /dev/#{loop_dev}"
