@@ -24,11 +24,7 @@ filegen clockstats file clockstats type day enable
 #pool 3.ubuntu.pool.ntp.org iburst
 
 <% node[:ntp][node[:role]][:servers].each do |s| %>
-<%= s %>
-<% end %>
-
-# Use Ubuntu's ntp server as a fallback.
-pool ntp.ubuntu.com
+<%= s %><% end %>
 
 server  127.127.1.0 # local clock
 fudge   127.127.1.0 stratum 10
