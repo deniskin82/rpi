@@ -7,7 +7,7 @@ define :install_coredns do
   when 'x86_64'
     'amd64'
   end
-  coredns_version = ENV['COREDNS_VERSION'] || params[:version] || '1.6.9'
+  coredns_version = ENV['COREDNS_VERSION'] || params[:version] || node[:versions][:coredns] || '1.6.9'
   coredns_path    = node[:coredns][:homedir] || '/opt/coredns'
   coredns_user    = node[:coredns][:user] || 'coredns'
   coredns_url     = "https://github.com/coredns/coredns/releases/download/v#{coredns_version}/coredns_#{coredns_version}_linux_#{linux_arch}.tgz"
