@@ -1,16 +1,23 @@
 ubuntu_ver = '18.04.4'
-ubuntu_img = "ubuntu-#{ubuntu_ver}-preinstalled-server-arm64+raspi3.img"
-ubuntu_url = "http://cdimage.ubuntu.com/releases/#{ubuntu_ver}/release/#{ubuntu_img}.xz"
+ubuntu_img = "ubuntu-#{ubuntu_ver}-preinstalled-server-arm64+raspi3.img".chomp
+ubuntu_url = "http://cdimage.ubuntu.com/releases/#{ubuntu_ver}/release/#{ubuntu_img}.xz".chomp
+local_img = "#{ENV['HOME']}/Downloads/#{ubuntu_img}"
 
 package 'xz-utils'
 package 'kpartx'
+package 'curl'
 
-execute 'decompress image' do
-  command "xz -k -d #{ENV['HOME']}/Downloads/#{ubuntu_img}.xz"
-  not_if "test -f #{ENV['HOME']}/Downloads/#{ubuntu_img}"
+http_request "#{local_img}.xz" do
+  url "#{ubuntu_url}"
+  not_if "test -f #{local_img}.xz"
 end
 
-mapped_dev = run_command("kpartx -a -v #{ENV['HOME']}/Downloads/#{ubuntu_img} | egrep 'p1 ' | cut -d ' ' -f3")
+execute 'decompress image' do
+  command "xz -k -d #{local_img}.xz"
+  not_if "test -f #{local_img}"
+end
+
+mapped_dev = run_command("kpartx -a -v #{local_img} | egrep 'p1 ' | cut -d ' ' -f3")
 dm = mapped_dev.stdout.chomp
 loop_dev = dm.sub(/p1$/,'')
 
