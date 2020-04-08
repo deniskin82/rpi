@@ -22,6 +22,12 @@ execute 'mount root' do
   command "udisksctl mount -b /dev/mapper/#{loop_dev}p2"
 end
 
+local_ruby_block 'sleep for a few' do
+  block do
+    sleep(3)
+  end
+end
+
 remote_file "/media/#{ENV['USER']}/system-boot/user-data" do
   source 'files/user-data'
   mode '0644'
@@ -31,6 +37,12 @@ file "/media/#{ENV['USER']}/writable/etc/cloud/cloud.cfg" do
   action :edit
   block do |content|
     content.gsub!(/^.*scripts-user.*$/, ' - [ scripts-user, always ]')
+  end
+end
+
+local_ruby_block 'sleep for a few' do
+  block do
+    sleep(2)
   end
 end
 
