@@ -12,13 +12,8 @@ define :install_monit do
   monit_url     = "https://mmonit.com/monit/dist/binary/#{monit_version}/monit-#{monit_version}-linux-#{linux_arch}.tar.gz"
   monit_tar     = '/tmp/monit.tgz'
   monit_confdir = node[:monit][:confdir] || "#{monit_path}/config"
-  monit_datadir = node[:monit][:datadir] || "#{monit_path}/data"
 
   directory "#{monit_path}/bin"
-
-  directory "#{monit_confdir}"
-
-  directory "#{monit_datadir}"
 
   http_request "#{monit_tar}" do
     url "#{monit_url}"

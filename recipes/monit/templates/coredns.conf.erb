@@ -1,0 +1,5 @@
+check process coredns matching "coredns.*Corefile"
+  start program "/usr/sbin/service coredns start"
+    with timeout 5 seconds
+  stop program "/usr/sbin/service coredns stop"
+  group system

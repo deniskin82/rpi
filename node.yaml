@@ -27,6 +27,7 @@ monit:
   homedir: "/opt/monit"
   confdir: "/opt/monit/conf"
   datadir: "/opt/monit/data"
+  eventsdir: "/opt/monit/data/events"
 ntp:
   master:
     servers:
