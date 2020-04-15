@@ -1,8 +1,8 @@
 .:<%= node[:coredns][:ports][:dns] %> {
   log . "{proto} Request: {name} {type} {>id}"
-  forward . <%= node[:coredns][:google_dns].join(' ') %> {
-    policy round_robin
-    tls_servername dns.google
+  forward . <%= node[:coredns][:forward][:servers].join(' ') %> {
+    policy <%= node[:coredns][:forward][:policy] %>
+    tls_servername <%= node[:coredns][:forward][:name] %>
   }
   bind <%= node[:facter][:networking][:ip] %>
   cache 30

@@ -9,7 +9,24 @@ coredns:
     dns: 53
     health: 8091
     prometheus: 9153
-  google_dns: [ 'tls://8.8.8.8', 'tls://8.8.4.4' ]
+  forward:
+    servers: [ 'tls://8.8.8.8', 'tls://8.8.4.4' ]
+    name: 'dns.google'
+    policy: 'round_robin'
+monit:
+  poll: 30
+  delay: 30
+  httpd:
+    port: 2812
+    address: 0.0.0.0
+    allow:
+      - localhost
+      - 127.0.0.1
+      - admin:monit
+      - health:monit read-only
+  homedir: "/opt/monit"
+  confdir: "/opt/monit/conf"
+  datadir: "/opt/monit/data"
 ntp:
   master:
     servers:
@@ -25,3 +42,4 @@ ntp:
 versions:
   ubuntu: '18.04.4'
   coredns: '1.6.9'
+  monit: '5.26.0'
