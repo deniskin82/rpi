@@ -1,3 +1,12 @@
+%w(
+  apt-transport-https
+  ca-certificates
+  curl
+  software-properties-common
+).each do |pkg|
+  package pkg
+end
+
 linux_arch    = case node[:kernel][:machine]
 when 'aarch64'
   'arm64'
