@@ -1,3 +1,12 @@
+family_name = case node[:platform_version]
+when '20.04'
+  'focal'
+when '18.04'
+  'bionic'
+when '16.04'
+  'xenial'
+end
+
 %w(
   apt-transport-https
   ca-certificates
@@ -13,7 +22,7 @@ when 'aarch64'
 when 'x86_64'
   'amd64'
 end
-execute "add-apt-repository -y 'deb [arch=#{linux_arch}] https://download.docker.com/linux/ubuntu bionic stable'" do
+execute "add-apt-repository -y 'deb [arch=#{linux_arch}] https://download.docker.com/linux/ubuntu #{family_name} stable'" do
   not_if 'grep -q docker /etc/apt/sources.list'
   notifies :run, 'execute[apt-get update]', :immediately
 end
