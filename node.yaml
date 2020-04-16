@@ -1,3 +1,28 @@
+consul:
+  homedir: "/opt/consul"
+  confdir: "/opt/consul/config"
+  datadir: "/opt/consul/data"
+  user: "consul"
+  group: "consul"
+  acl:
+    enabled: false
+    default_policy: "deny"
+    down_policy: "extend-cache"
+    enable_token_persistence: true
+  ports:
+    http: 8500
+    https: 8501
+    grps: 8502
+  connect: true
+  ui: false
+  server: false
+  client: false
+  addr:
+    client: "0.0.0.0"
+  disable_anonymous_signature: true
+  disable_update_check: true
+  log:
+    level: "warn"
 coredns:
   homedir: "/opt/coredns"
   confdir: "/opt/coredns/config"
@@ -43,3 +68,4 @@ versions:
   ubuntu: '18.04.4'
   coredns: '1.6.9'
   monit: '5.26.0'
+  consul: '1.7.2'
