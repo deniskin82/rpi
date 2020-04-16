@@ -32,7 +32,7 @@ runcmd:
   - host_prefix='pi-'
   - linux_arch=$(uname -m)
   - cloud-init-per always sethost hostnamectl set-hostname ${host_prefix}${ip_dash}
-  - cloud-init-per once donwload_mitamae curl -L -s -S https://github.com/itamae-kitchen/mitamae/releases/download/v1.11.6/mitamae-${linux_arch}-linux -o /usr/local/bin/mitamae
+  - cloud-init-per once donwload_mitamae curl -L -s -S https://github.com/itamae-kitchen/mitamae/releases/download/v1.11.7/mitamae-${linux_arch}-linux -o /usr/local/bin/mitamae
   - cloud-init-per always chmod_mitamae chmod 0755 /usr/local/bin/mitamae
   - cloud-init-per always sleep sleep 5
   - cloud-init-per once clone_repo git clone https://github.com/deniskin82/rpi.git /opt/rpi
