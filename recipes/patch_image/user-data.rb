@@ -1,6 +1,6 @@
 node_type = node[:role] || 'aio'
 ubuntu_ver = node[:versions][:ubuntu]
-ubuntu_img = "ubuntu-#{ubuntu_ver}-preinstalled-server-arm64+raspi3.img".chomp
+ubuntu_img = "ubuntu-#{ubuntu_ver}-preinstalled-server-arm64+raspi.img".chomp
 ubuntu_url = "http://cdimage.ubuntu.com/releases/#{ubuntu_ver}/release/#{ubuntu_img}.xz".chomp
 local_image = "#{ENV['HOME']}/Downloads/#{ubuntu_img}"
 local_archive = "#{ENV['HOME']}/Downloads/#{ubuntu_img}.xz"

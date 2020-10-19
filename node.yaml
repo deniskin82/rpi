@@ -65,7 +65,7 @@ ntp:
   restrict:
     local: 'restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap'
 versions:
-  ubuntu: '18.04.4'
+  ubuntu: '20.04'
   coredns: '1.6.9'
   monit: '5.26.0'
   consul: '1.7.2'
