@@ -7,7 +7,7 @@ define :install_consul do
   when 'x86_64'
     'amd64'
   end
-  consul_version = ENV['CONSUL_VERSION'] || params[:version] || node[:versions][:consul] || '1.7.2'
+  consul_version = ENV['CONSUL_VERSION'] || params[:version] || node[:versions][:consul] || '1.10.1'
   consul_path    = node[:consul][:homedir] || '/opt/consul'
   consul_user    = node[:consul][:user] || 'consul'
   consul_group   = node[:consul][:group] || 'consul'
