@@ -67,5 +67,5 @@ ntp:
 versions:
   ubuntu: '20.04.2'
   coredns: '1.8.4'
-  monit: '5.28.1'
-  consul: '1.10.1'
+  monit: '5.29.0'
+  consul: '1.10.2'
